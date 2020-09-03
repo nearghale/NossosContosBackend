@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Nossos_Contos": {
+    "NossosContos": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
