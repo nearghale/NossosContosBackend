@@ -15,7 +15,7 @@ namespace Nossos_Contos.Controllers
     public class TaleController : Controller
     {
 
-        private Repositories.MongoDB.PersistentRepository<Entities.Tale>  taleRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
         private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
         private TaleService taleService;
 
@@ -41,8 +41,30 @@ namespace Nossos_Contos.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpPut("{id}")]
+        public ActionResult Update(string id, Model.TaleUpdate taleUpdate)
+        {
+            var tale = taleRepository.FirstOrDefault(t => t.id == id);
+            if (tale == null)
+                return this.Unauthorized("TALE_NOT_FOUNDED");
 
+            taleService.Update(tale, taleUpdate);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Update(string id)
+        {
+            var tale = taleRepository.FirstOrDefault(t => t.id == id);
+            if (tale == null)
+                return this.Unauthorized("TALE_NOT_FOUNDED");
+
+            taleService.Delete(tale);
+            return Ok();
+        }
+
+
+        [HttpGet("{id}")]
         public ActionResult<List<Entities.Tale>> GetTalesAuthor(string id)
         {
             var account = accountRepository.FirstOrDefault(a => a.id == id);
