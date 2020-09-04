@@ -17,6 +17,8 @@ namespace Nossos_Contos.Controllers
         private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
         private AccountService accountService;
 
+        // testando nova branch do rafael
+
         public AccountController(DatabaseSettings databaseSettings)
         {
         
