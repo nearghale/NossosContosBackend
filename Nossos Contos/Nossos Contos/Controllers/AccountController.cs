@@ -45,7 +45,7 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Entities.Account> Update(string id, Model.AccountUpdate accountModel)
+        public ActionResult Update(string id, Model.AccountUpdate accountModel)
         {
 
             var accountUser = accountRepository.FirstOrDefault(a => a.id == id);
@@ -54,7 +54,7 @@ namespace Nossos_Contos.Controllers
 
             accountService.Update(accountUser, accountModel);
             var userUpdate = accountService.GetAccount(id);
-            return userUpdate;
+            return Ok();
 
         }
 

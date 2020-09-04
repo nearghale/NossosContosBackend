@@ -36,6 +36,22 @@ namespace Nossos_Contos.Services
 
         }
 
+        public void Update(Entities.Tale tale, Model.TaleUpdate taleUpdate)
+        {
+            tale.Genre = taleUpdate.genre;
+            tale.MinimumAge = taleUpdate.minimum_age;
+            tale.TaleText = taleUpdate.tale_text;
+            tale.Title = taleUpdate.title;
+
+            _taleRepository.Update(tale.id, tale);
+
+        }
+
+        public void Delete(Entities.Tale tale)
+        {
+            _taleRepository.Remove(tale);
+        }
+
         public List<Entities.Tale> GetTalesAuthor(string id)
         {
 
