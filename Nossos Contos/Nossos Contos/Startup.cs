@@ -38,10 +38,8 @@ namespace Nossos_Contos
             services.AddSingleton<DatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
 
 
-         
-
-
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.UseMemberCasing()); 
 
         }
 

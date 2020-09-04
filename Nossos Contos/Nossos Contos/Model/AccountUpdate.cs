@@ -7,10 +7,10 @@ namespace Nossos_Contos.Model
 {
     public class AccountUpdate
     {
-        public string Name { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
-        public string Password { get; set; }
+        public string name { get; set; }
+        public string last_name { get; set; }
+        public int age { get; set; }
+        public string password { get; set; }
 
     }
 }

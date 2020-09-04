@@ -18,18 +18,17 @@ namespace Nossos_Contos.Services
 
         public Entities.Account Create(Entities.Account account)
         {
-            var userAccount = new Entities.Account();
+            var newAccount = new Entities.Account();
 
-            userAccount.id = account.id;
-            userAccount.Age = account.Age;
-            userAccount.Name = account.Name;
-            userAccount.LastName = account.LastName;
-            userAccount.Password = account.Password;
-            userAccount.UserName = account.UserName;
+            newAccount.Age = account.Age;
+            newAccount.Name = account.Name;
+            newAccount.id = account.id;
+            newAccount.LastName = account.LastName;
+            newAccount.Password = account.Password;
+            newAccount.UserName = account.UserName;
 
-            var newUserAccount = _accountRepository.Create(userAccount);
+            return _accountRepository.Create(newAccount);
 
-            return newUserAccount;
 
         }
         public void Delete(string id)
@@ -39,10 +38,10 @@ namespace Nossos_Contos.Services
 
         public void Update(Entities.Account account, Model.AccountUpdate accountUpdate)
         {
-            account.Name = accountUpdate.Name;
-            account.LastName = accountUpdate.LastName;
-            account.Age = accountUpdate.Age;
-            account.Password = accountUpdate.Password;
+            account.Name = accountUpdate.name;
+            account.LastName = accountUpdate.last_name;
+            account.Age = accountUpdate.age;
+            account.Password = accountUpdate.password;
 
            _accountRepository.Update(account.id, account);
 

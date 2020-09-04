@@ -26,14 +26,14 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Entities.Account> Create(Entities.Account accountModel)
+        public ActionResult<Entities.Account> Create(Entities.Account account)
         {
 
-            var account = accountRepository.FirstOrDefault(a => a.UserName == accountModel.UserName);
-            if (account != null)
+            var newAccount = accountRepository.FirstOrDefault(a => a.UserName == account.UserName);
+            if (newAccount != null)
                return Unauthorized("USER_ALREADY_EXISTS");
 
-            return accountService.Create(accountModel);
+            return accountService.Create(account);
 
         }
 
@@ -45,14 +45,14 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Entities.Account> Update(string id, Model.AccountUpdate account)
+        public ActionResult<Entities.Account> Update(string id, Model.AccountUpdate accountModel)
         {
 
             var accountUser = accountRepository.FirstOrDefault(a => a.id == id);
             if (accountUser == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
 
-            accountService.Update(accountUser, account);
+            accountService.Update(accountUser, accountModel);
             var userUpdate = accountService.GetAccount(id);
             return userUpdate;
 

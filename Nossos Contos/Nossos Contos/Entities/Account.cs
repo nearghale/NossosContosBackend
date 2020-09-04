@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Nossos_Contos.Entities
 {
     public class Account : MongoDB.Base
@@ -22,8 +23,6 @@ namespace Nossos_Contos.Entities
 
         [JsonProperty("password")]
         public string Password { get; set; }
-
-
 
     }
 }
