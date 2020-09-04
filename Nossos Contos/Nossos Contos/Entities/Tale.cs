@@ -33,8 +33,5 @@ namespace Nossos_Contos.Entities
         [JsonProperty("genre")]
         public string Genre { get; set; }
 
-
-
-
     }
 }
