@@ -32,6 +32,7 @@ namespace Nossos_Contos.Controllers
         public ActionResult<Entities.Tale> Create(Entities.Tale tale)
         {
 
+            //testando branch nova
             var account = accountRepository.FirstOrDefault(a => a.id == tale.IDUser);
             if (account == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
