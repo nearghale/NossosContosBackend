@@ -34,7 +34,5 @@ namespace Nossos_Contos.Entities
         public string Genre { get; set; }
 
 
-
-
     }
 }
