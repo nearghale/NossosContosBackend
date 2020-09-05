@@ -39,6 +39,28 @@ namespace Nossos_Contos.Controllers
 
         }
 
+        [HttpPut("{id}")]
+        public ActionResult Update(string id, Model.CommentUpdate commentUpdate)
+        {
+            var comment = commentRepository.FirstOrDefault(c => c.id == id);
+            if (comment == null)
+                return this.Unauthorized("COMMENT_NOT_FOUNDED");
+
+            commentService.Update(comment, commentUpdate);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(string id)
+        {
+            var comment = commentRepository.FirstOrDefault(c => c.id == id);
+            if (comment == null)
+                return this.Unauthorized("COMMENT_NOT_FOUNDED");
+
+            commentService.Delete(comment);
+            return Ok();
+        }
+
 
 
     }

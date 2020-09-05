@@ -8,11 +8,14 @@ namespace Nossos_Contos.Services
     public class AccountService
     {
         private Repositories.MongoDB.PersistentRepository<Entities.Account> _accountRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> _generalInformationRepository;
 
-        public AccountService(Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository)
+
+        public AccountService(Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository, Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository)
         {
 
             _accountRepository = accountRepository;
+            _generalInformationRepository = generalInformationRepository;
 
         }
 
@@ -26,6 +29,13 @@ namespace Nossos_Contos.Services
             newAccount.LastName = account.LastName;
             newAccount.Password = account.Password;
             newAccount.UserName = account.UserName;
+            newAccount.CreationDateTime = DateTime.Now;
+
+            var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
+            generalInformation.AccountsTotal += 1;
+
+            _generalInformationRepository.Update(generalInformation.id, generalInformation);
+
 
             return _accountRepository.Create(newAccount);
 
@@ -33,6 +43,10 @@ namespace Nossos_Contos.Services
         }
         public void Delete(string id)
         {
+            var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
+            generalInformation.AccountsTotal -= 1;
+
+            _generalInformationRepository.Update(generalInformation.id, generalInformation);
             _accountRepository.Remove(id);
         }
 
@@ -42,6 +56,9 @@ namespace Nossos_Contos.Services
             account.LastName = accountUpdate.last_name;
             account.Age = accountUpdate.age;
             account.Password = accountUpdate.password;
+            account.UpdateDateTime = DateTime.Now;
+       
+        
 
            _accountRepository.Update(account.id, account);
 

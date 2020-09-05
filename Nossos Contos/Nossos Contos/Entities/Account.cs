@@ -24,5 +24,11 @@ namespace Nossos_Contos.Entities
         [JsonProperty("password")]
         public string Password { get; set; }
 
+        [JsonProperty("creation_date")]
+        public DateTime CreationDateTime { get; set; }
+
+        [JsonProperty("update_date_time")]
+        public DateTime UpdateDateTime { get; set; }
+
     }
 }

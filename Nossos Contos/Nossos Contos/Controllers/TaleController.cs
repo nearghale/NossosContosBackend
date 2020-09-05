@@ -53,7 +53,7 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Update(string id)
+        public ActionResult Delete(string id)
         {
             var tale = taleRepository.FirstOrDefault(t => t.id == id);
             if (tale == null)

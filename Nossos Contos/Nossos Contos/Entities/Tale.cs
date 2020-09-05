@@ -22,16 +22,22 @@ namespace Nossos_Contos.Entities
         public string MinimumAge { get; set; }
 
         [JsonProperty("number_views")]
-        public string NumberViews { get; set; }
+        public int NumberViews { get; set; }
 
         [JsonProperty("number_complaints")]
-        public string NumberComplaints { get; set; }
+        public int NumberComplaints { get; set; }
 
         [JsonProperty("author")]
         public string Author { get; set; }
 
         [JsonProperty("genre")]
         public string Genre { get; set; }
+
+        [JsonProperty("creation_date")]
+        public DateTime CreationDateTime { get; set; }
+
+        [JsonProperty("update_date_time")]
+        public DateTime UpdateDateTime { get; set; }
 
 
     }

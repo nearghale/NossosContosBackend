@@ -17,6 +17,11 @@ namespace Nossos_Contos.Entities
         [JsonProperty("commentary")]
         public string Commentary { get; set; }
 
+        [JsonProperty("creation_date")]
+        public DateTime CreationDateTime { get; set; }
+
+        [JsonProperty("update_date_time")]
+        public DateTime UpdateDateTime { get; set; }
 
     }
 }

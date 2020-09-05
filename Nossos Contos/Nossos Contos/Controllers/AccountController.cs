@@ -15,6 +15,7 @@ namespace Nossos_Contos.Controllers
     public class AccountController : Controller
     {
         private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
         private AccountService accountService;
 
         // testando nova branch do rafael
@@ -23,7 +24,8 @@ namespace Nossos_Contos.Controllers
         {
         
             accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
-            accountService = new AccountService(accountRepository);
+            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
+            accountService = new AccountService(accountRepository, generalInformationRepository);
         
         }
 

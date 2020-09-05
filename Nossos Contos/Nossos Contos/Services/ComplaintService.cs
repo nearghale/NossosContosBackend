@@ -18,7 +18,7 @@ namespace Nossos_Contos.Services
 
         }
 
-        public Entities.Complaint Create(Entities.Complaint complaint)
+        public Entities.Complaint Create(Entities.Tale tale, Entities.Complaint complaint)
         {
             var newComplaint = new Entities.Complaint();
 
@@ -27,6 +27,11 @@ namespace Nossos_Contos.Services
             newComplaint.IDTale = complaint.IDTale;
             newComplaint.TypeComplaint = complaint.TypeComplaint;
             newComplaint.TitleComplaint = complaint.TitleComplaint;
+            newComplaint.CreationDateTime = DateTime.Now;
+
+            tale.NumberComplaints += 1;
+            _taleRepository.Update(tale.id, tale);
+
 
             return _complaintRepository.Create(newComplaint);
         }

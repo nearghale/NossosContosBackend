@@ -35,7 +35,7 @@ namespace Nossos_Contos.Controllers
             if (tale == null)
                 return this.Unauthorized("TALE_NOT_FOUNDED");
 
-            return complaintService.Create(complaint);
+            return complaintService.Create(tale, complaint);
             
         }
 

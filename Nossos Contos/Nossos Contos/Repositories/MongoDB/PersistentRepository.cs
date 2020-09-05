@@ -50,6 +50,7 @@ namespace Nossos_Contos.Repositories.MongoDB
 
         }
 
+
         public bool Any(Expression<Func<T, bool>> expression)
         {
 
@@ -74,7 +75,11 @@ namespace Nossos_Contos.Repositories.MongoDB
           this.Collection.ReplaceOne(i => i.id == id, item);
         }
 
-            
+        public void Remove(Expression<Func<T, bool>> expression)
+        {
+            this.Collection.DeleteMany(expression);
+        }
+
         public void Remove(T item) { 
             this.Collection.DeleteOne(i => i.id == item.id);
         }

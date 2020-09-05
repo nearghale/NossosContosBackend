@@ -31,6 +31,7 @@ namespace Nossos_Contos.Services
             newTale.NumberViews = tale.NumberViews;
             newTale.TaleText = tale.TaleText;
             newTale.Title = tale.Title;
+            newTale.CreationDateTime = DateTime.Now;
 
             return _taleRepository.Create(newTale);
 
@@ -42,6 +43,9 @@ namespace Nossos_Contos.Services
             tale.MinimumAge = taleUpdate.minimum_age;
             tale.TaleText = taleUpdate.tale_text;
             tale.Title = taleUpdate.title;
+            tale.NumberComplaints = 0;
+            tale.NumberViews = 0;
+            tale.UpdateDateTime = DateTime.Now;
 
             _taleRepository.Update(tale.id, tale);
 

@@ -30,13 +30,26 @@ namespace Nossos_Contos.Services
             newComment.id = comment.id;
             newComment.IDTale = comment.IDTale;
             newComment.TitleComment = comment.TitleComment;
+            newComment.CreationDateTime = DateTime.Now;
 
             return _commentRepository.Create(newComment);
 
         }
 
+        public void Update(Entities.Comment comment, Model.CommentUpdate commentUpdate)
+        {
+            comment.Commentary = commentUpdate.commentary;
+            comment.TitleComment = commentUpdate.title_comment;
+            comment.UpdateDateTime = DateTime.Now;
 
+            _commentRepository.Update(comment.id, comment);
 
+        }
 
+        public void Delete(Entities.Comment comment)
+        {
+            _commentRepository.Remove(comment);
+
+        }
     }
 }
