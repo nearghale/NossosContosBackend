@@ -12,19 +12,12 @@ namespace Nossos_Contos.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class CommentController : Controller
+    public class CommentController : Base.BaseController
     {
 
-        private Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
-        private CommentService commentService;
-
-        public CommentController(DatabaseSettings databaseSettings)
+       
+        public CommentController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
-
-            commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
-            taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
-            commentService = new CommentService(taleRepository, commentRepository);
 
         }
 

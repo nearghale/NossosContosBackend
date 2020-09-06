@@ -12,39 +12,13 @@ namespace Nossos_Contos.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class AdminController : Controller
+    public class AdminController : Base.BaseController
     {
 
-        private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Complaint> complaintRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
 
 
-        private Services.AdminService adminService;
-        private Services.AccountService accountService;
-        private Services.TaleService taleService;
-
-        private DeleteNextDependenciesHelper deleteNextDependencies;
-
-
-
-        public AdminController(DatabaseSettings databaseSettings)
+        public AdminController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
-
-            complaintRepository = new Repositories.MongoDB.PersistentRepository<Entities.Complaint>(databaseSettings, "complaint");
-            taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
-            accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
-            commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
-            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
-
-
-            adminService = new Services.AdminService(complaintRepository, taleRepository, accountRepository, generalInformationRepository);
-            accountService = new Services.AccountService(accountRepository, generalInformationRepository);
-            taleService = new Services.TaleService(taleRepository, generalInformationRepository);
-
-            deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository);
 
         }
 

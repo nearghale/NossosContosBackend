@@ -13,33 +13,13 @@ namespace Nossos_Contos.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class AccountController : Controller
+    public class AccountController : Base.BaseController
     {
-        private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
+     
 
-
-
-
-        private AccountService accountService;
-        private DeleteNextDependenciesHelper deleteNextDependencies;
-
-
-        // testando nova branch do rafael
-
-        public AccountController(DatabaseSettings databaseSettings)
+        public AccountController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
-        
-            accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
-            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
-            taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
-            commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
 
-            accountService = new AccountService(accountRepository, generalInformationRepository);
-            deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository);
-        
         }
 
         [HttpPost]

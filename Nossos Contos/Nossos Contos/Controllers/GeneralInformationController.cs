@@ -11,13 +11,11 @@ namespace Nossos_Contos.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class GeneralInformationController : Controller
+    public class GeneralInformationController : Base.BaseController
     {
-        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
 
-        public GeneralInformationController(DatabaseSettings databaseSettings)
+        public GeneralInformationController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
-            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<GeneralInformation>(databaseSettings, "general-information");
 
         }
 

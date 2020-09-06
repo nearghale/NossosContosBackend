@@ -12,19 +12,13 @@ namespace Nossos_Contos.Controllers
     [Route("[controller]")]
     [ApiController]
 
-    public class ComplaintController : Controller
+    public class ComplaintController : Base.BaseController
     {
 
-        private Repositories.MongoDB.PersistentRepository<Entities.Complaint> complaintRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
-        private ComplaintService complaintService;
+     
 
-        public ComplaintController(DatabaseSettings databaseSettings)
+        public ComplaintController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
-
-            complaintRepository = new Repositories.MongoDB.PersistentRepository<Entities.Complaint>(databaseSettings, "complaint");
-            taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
-            complaintService = new ComplaintService(taleRepository, complaintRepository);
 
         }
 
