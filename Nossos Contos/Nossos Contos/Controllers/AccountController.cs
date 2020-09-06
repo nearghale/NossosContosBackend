@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Services;
 using Nossos_Contos.Model;
+using Nossos_Contos.Helpers;
 
 namespace Nossos_Contos.Controllers
 {
@@ -16,7 +17,15 @@ namespace Nossos_Contos.Controllers
     {
         private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
         private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
+
+
+
+
         private AccountService accountService;
+        private DeleteNextDependenciesHelper deleteNextDependencies;
+
 
         // testando nova branch do rafael
 
@@ -25,7 +34,11 @@ namespace Nossos_Contos.Controllers
         
             accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
             generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
+            taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
+            commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
+
             accountService = new AccountService(accountRepository, generalInformationRepository);
+            deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository);
         
         }
 
@@ -41,12 +54,7 @@ namespace Nossos_Contos.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult<List<Entities.Account>> GetAllAccounts()
-        {
-            return accountService.GetAllAccounts();
-
-        }
+     
 
         [HttpPut("{id}")]
         public ActionResult Update(string id, Model.AccountUpdate accountModel)
@@ -68,6 +76,8 @@ namespace Nossos_Contos.Controllers
             var user = accountRepository.FirstOrDefault(a => a.id == id);
             if (user == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
+
+            deleteNextDependencies.DeleteAccountDependencies(id);
 
             accountService.Delete(id);
             return Ok();

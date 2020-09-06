@@ -8,14 +8,19 @@ namespace Nossos_Contos.Services
     public class TaleService
     {
         private Repositories.MongoDB.PersistentRepository<Entities.Tale> _taleRepository;
-        private Repositories.MongoDB.PersistentRepository<Entities.Account> _accountRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> _generalInformationRepository;
+    
 
 
-        public TaleService(Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository, Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository)
+
+
+        public TaleService(Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository,
+                           Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository)
         {
 
             _taleRepository = taleRepository;
-            _accountRepository = accountRepository;
+            _generalInformationRepository = generalInformationRepository;
+     
 
         }
 
@@ -32,6 +37,12 @@ namespace Nossos_Contos.Services
             newTale.TaleText = tale.TaleText;
             newTale.Title = tale.Title;
             newTale.CreationDateTime = DateTime.Now;
+
+            var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
+            generalInformation.TalesTotal += 1;
+            generalInformation.NumberTalesMonth += 1;
+
+            _generalInformationRepository.Update(generalInformation.id, generalInformation);
 
             return _taleRepository.Create(newTale);
 
@@ -53,6 +64,11 @@ namespace Nossos_Contos.Services
 
         public void Delete(Entities.Tale tale)
         {
+            var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
+            generalInformation.TalesTotal -= 1;
+
+            _generalInformationRepository.Update(generalInformation.id, generalInformation);
+                
             _taleRepository.Remove(tale);
         }
 

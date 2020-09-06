@@ -10,14 +10,19 @@ namespace Nossos_Contos.Services
         public Repositories.MongoDB.PersistentRepository<Entities.Complaint> _complaintRepository;
         public Repositories.MongoDB.PersistentRepository<Entities.Tale> _taleRepository;
         public Repositories.MongoDB.PersistentRepository<Entities.Account> _accountRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> _generalInformationRepository;
+
 
         public AdminService(Repositories.MongoDB.PersistentRepository<Entities.Complaint> complaintRepository,
                             Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository,
-                            Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository)
+                            Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository,
+                            Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository)
         {
             _complaintRepository = complaintRepository;
             _taleRepository = taleRepository;
             _accountRepository = accountRepository;
+            _generalInformationRepository = generalInformationRepository;
+
         }
 
         public List<Entities.Tale> GetReportedTales()
@@ -27,18 +32,22 @@ namespace Nossos_Contos.Services
 
         }
 
-        public void DeleteTale(Entities.Tale tale)
+        public long GetTotalTales()
         {
-            _taleRepository.Remove(tale);
-            _complaintRepository.Remove(c => c.IDTale == tale.id);
+            var taleTotal = _generalInformationRepository.FirstOrDefault(g => true);
+            return taleTotal.TalesTotal;
         }
 
-        public void DeleteAccount(string id)
+        public long GetTotalTalesMonth()
         {
-            _accountRepository.Remove(id);
+            var taleTotal = _generalInformationRepository.FirstOrDefault(g => true);
+            return taleTotal.NumberTalesMonth;
         }
 
-
+        public List<Entities.Account> GetAllAccounts()
+        {
+            return _accountRepository.Get();
+        }
 
     }
 }

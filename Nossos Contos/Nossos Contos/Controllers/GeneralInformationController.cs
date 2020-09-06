@@ -17,7 +17,7 @@ namespace Nossos_Contos.Controllers
 
         public GeneralInformationController(DatabaseSettings databaseSettings)
         {
-            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
+            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<GeneralInformation>(databaseSettings, "general-information");
 
         }
 

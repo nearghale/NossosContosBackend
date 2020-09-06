@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nossos_Contos.Helpers;
 
 namespace Nossos_Contos.Controllers
 {
@@ -17,14 +18,22 @@ namespace Nossos_Contos.Controllers
 
         private Repositories.MongoDB.PersistentRepository<Entities.Tale> taleRepository;
         private Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
+        private Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
+
         private TaleService taleService;
+        private DeleteNextDependenciesHelper deleteNextDependencies;
 
         public TaleController(DatabaseSettings databaseSettings)
         {
 
             taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
+            generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
             accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
-            taleService = new TaleService(accountRepository, taleRepository);
+            commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
+
+            taleService = new TaleService(taleRepository, generalInformationRepository);
+            deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository);
 
         }
 
@@ -58,6 +67,8 @@ namespace Nossos_Contos.Controllers
             var tale = taleRepository.FirstOrDefault(t => t.id == id);
             if (tale == null)
                 return this.Unauthorized("TALE_NOT_FOUNDED");
+
+            deleteNextDependencies.DeleteTaleDependencies(id);
 
             taleService.Delete(tale);
             return Ok();

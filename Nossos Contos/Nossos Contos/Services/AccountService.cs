@@ -10,8 +10,8 @@ namespace Nossos_Contos.Services
         private Repositories.MongoDB.PersistentRepository<Entities.Account> _accountRepository;
         private Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> _generalInformationRepository;
 
-
-        public AccountService(Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository, Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository)
+        public AccountService(Repositories.MongoDB.PersistentRepository<Entities.Account> accountRepository, 
+                              Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository)
         {
 
             _accountRepository = accountRepository;
@@ -33,6 +33,7 @@ namespace Nossos_Contos.Services
 
             var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
             generalInformation.AccountsTotal += 1;
+            generalInformation.NumberAccountsMonth += 1;
 
             _generalInformationRepository.Update(generalInformation.id, generalInformation);
 
@@ -47,6 +48,7 @@ namespace Nossos_Contos.Services
             generalInformation.AccountsTotal -= 1;
 
             _generalInformationRepository.Update(generalInformation.id, generalInformation);
+
             _accountRepository.Remove(id);
         }
 
@@ -68,10 +70,7 @@ namespace Nossos_Contos.Services
             return _accountRepository.FirstOrDefault(a => a.id == id);
         }
 
-        public List<Entities.Account> GetAllAccounts()
-        {
-            return _accountRepository.Get();
-        }
+      
 
     }
 }
