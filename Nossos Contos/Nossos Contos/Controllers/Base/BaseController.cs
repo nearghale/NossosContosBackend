@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Helpers;
 using Nossos_Contos.Model;
 using Nossos_Contos.Services;
+using Nossos_Contos.Model.MongoDB;
+
+
 
 namespace Nossos_Contos.Controllers.Base
 {
@@ -30,18 +33,21 @@ namespace Nossos_Contos.Controllers.Base
 
         public BaseController(DatabaseSettings databaseSettings) 
         {
+            //repositorys
             accountRepository = new Repositories.MongoDB.PersistentRepository<Entities.Account>(databaseSettings, "account");
             generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
             taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
             commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
             complaintRepository = new Repositories.MongoDB.PersistentRepository<Entities.Complaint>(databaseSettings, "complaint");
 
+            //services
             accountService = new AccountService(accountRepository, generalInformationRepository);
             adminService = new AdminService(complaintRepository, taleRepository, accountRepository, generalInformationRepository);
             taleService = new TaleService(taleRepository, generalInformationRepository);
             commentService = new CommentService(taleRepository, commentRepository);
             complaintService = new ComplaintService(taleRepository, complaintRepository);
 
+            //helpers
             deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository);
 
         }

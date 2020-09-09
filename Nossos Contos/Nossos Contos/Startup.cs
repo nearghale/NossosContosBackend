@@ -30,12 +30,17 @@ namespace Nossos_Contos
         {
          
             // requires using Microsoft.Extensions.Options
-            services.Configure<DatabaseSettings>(
-                Configuration.GetSection(nameof(DatabaseSettings)));
+            services.Configure<Model.MongoDB.DatabaseSettings>(
+                Configuration.GetSection(nameof(Model.MongoDB.DatabaseSettings)));
 
-            services.Configure<DatabaseSettings>(Configuration.GetSection("AccountDatabaseSettings"));
+            services.Configure<Model.MongoDB.DatabaseSettings>(Configuration.GetSection("AccountDatabaseSettings"));
+            services.Configure<Model.Configurations.AWS.Credentials>(Configuration.GetSection("AWSCredentials"));
+            services.Configure<Model.Configurations.AWS.S3Configuration>(Configuration.GetSection("AWSS3"));
 
-            services.AddSingleton<DatabaseSettings>(sp => sp.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<Model.MongoDB.DatabaseSettings>>().Value);
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<Model.Configurations.AWS.Credentials>>().Value);
+            services.AddSingleton(sp => sp.GetRequiredService<IOptions<Model.Configurations.AWS.S3Configuration>>().Value);
+
 
 
             services.AddControllers()

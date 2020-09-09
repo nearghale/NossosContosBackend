@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nossos_Contos.Model.MongoDB;
+
 
 namespace Nossos_Contos.Controllers
 {

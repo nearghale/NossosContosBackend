@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Nossos_Contos.Model.MongoDB;
+
 
 namespace Nossos_Contos.Repositories.MongoDB
 {
@@ -20,7 +22,7 @@ namespace Nossos_Contos.Repositories.MongoDB
             this.Collection = _database.GetCollection<T>(collection);
         }
 
-        public PersistentRepository(Nossos_Contos.Model.DatabaseSettings settings, string collection)
+        public PersistentRepository(DatabaseSettings settings, string collection)
         {
             _client = new MongoClient(settings.ConnectionString);
             _database = _client.GetDatabase(settings.DatabaseName);

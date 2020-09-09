@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Entities;
 using Nossos_Contos.Model;
+using Nossos_Contos.Model.MongoDB;
+
 
 namespace Nossos_Contos.Controllers
 {

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Services;
 using Nossos_Contos.Model;
 using Nossos_Contos.Helpers;
+using Nossos_Contos.Model.MongoDB;
 
 namespace Nossos_Contos.Controllers
 {
