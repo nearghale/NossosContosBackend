@@ -17,7 +17,7 @@ namespace Nossos_Contos.Controllers
     public class AccountController : Base.BaseController
     {
      
-
+        //testando commit
         public AccountController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
 
