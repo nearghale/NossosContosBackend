@@ -17,8 +17,7 @@ namespace Nossos_Contos.Controllers
     public class AdminController : Base.BaseController
     {
 
-
-
+        //a
         public AdminController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
 
