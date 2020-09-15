@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Entities;
-using Nossos_Contos.Model;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models;
+using Nossos_Contos.Models.MongoDB;
 
 
 namespace Nossos_Contos.Controllers

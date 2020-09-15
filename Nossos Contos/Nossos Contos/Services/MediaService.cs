@@ -12,10 +12,10 @@ namespace Nossos_Contos.Services
 
         private Repositories.MongoDB.PersistentRepository<Entities.Media> repository;
         private Services.AWS.S3Service s3Service;
-        private Model.Configurations.AWS.S3Configuration _s3Configuration;
+        private Models.Configurations.AWS.S3Configuration _s3Configuration;
 
         public MediaService(Repositories.MongoDB.PersistentRepository<Entities.Media> mediaRepository, 
-            Model.Configurations.AWS.Credentials awsCredentials, Model.Configurations.AWS.S3Configuration s3Configuration)
+            Models.Configurations.AWS.Credentials awsCredentials, Models.Configurations.AWS.S3Configuration s3Configuration)
         {
             _s3Configuration = s3Configuration;
 

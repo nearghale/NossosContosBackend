@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nossos_Contos.Model.Configurations.AWS
+namespace Nossos_Contos.Models.Configurations.AWS
 {
     public class Credentials
     {

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Helpers;
-using Nossos_Contos.Model;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models;
+using Nossos_Contos.Models.MongoDB;
 
 
 namespace Nossos_Contos.Controllers
@@ -17,14 +18,13 @@ namespace Nossos_Contos.Controllers
     public class AdminController : Base.BaseController
     {
 
-        //a
         public AdminController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
 
         }
 
-        [HttpGet("primeiro-dia")]
-        public DateTime primeiroDiaDoMês()
+        [HttpGet("first-day")]
+        public DateTime PrimeiroDiaDoMês()
         {
             //Vamos considerar que a data seja o dia de hoje, mas pode ser qualquer data.
             DateTime data = DateTime.Today;
@@ -34,7 +34,7 @@ namespace Nossos_Contos.Controllers
             return primeiroDiaDoMes;
         }
 
-
+        [Authorize]
         [HttpGet("reported-tales")]
         public ActionResult<List<Entities.Tale>> GetReportedTales()
         {
@@ -48,6 +48,7 @@ namespace Nossos_Contos.Controllers
 
         }
 
+        [Authorize]
         [HttpGet("total-tales")]
         public long GetTotalTales()
         {

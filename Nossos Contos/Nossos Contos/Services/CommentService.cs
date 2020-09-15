@@ -36,7 +36,7 @@ namespace Nossos_Contos.Services
 
         }
 
-        public void Update(Entities.Comment comment, Model.CommentUpdate commentUpdate)
+        public void Update(Entities.Comment comment, Models.CommentUpdate commentUpdate)
         {
             comment.Commentary = commentUpdate.commentary;
             comment.TitleComment = commentUpdate.title_comment;

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nossos_Contos.Model;
+using Nossos_Contos.Models;
 using Nossos_Contos.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models.MongoDB;
 
 
 namespace Nossos_Contos.Controllers

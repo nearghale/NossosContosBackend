@@ -30,6 +30,7 @@ namespace Nossos_Contos.Services
             newAccount.Password = account.Password;
             newAccount.UserName = account.UserName;
             newAccount.CreationDateTime = DateTime.Now;
+            newAccount.ProfilePhoto = account.ProfilePhoto;
 
             var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
             generalInformation.AccountsTotal += 1;
@@ -52,13 +53,14 @@ namespace Nossos_Contos.Services
             _accountRepository.Remove(id);
         }
 
-        public void Update(Entities.Account account, Model.AccountUpdate accountUpdate)
+        public void Update(Entities.Account account, Models.AccountUpdate accountUpdate)
         {
             account.Name = accountUpdate.name;
             account.LastName = accountUpdate.last_name;
             account.Age = accountUpdate.age;
             account.Password = accountUpdate.password;
             account.UpdateDateTime = DateTime.Now;
+            account.ProfilePhoto = accountUpdate.profile_photo;
        
         
 

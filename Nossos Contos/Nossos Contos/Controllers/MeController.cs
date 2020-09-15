@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models.MongoDB;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,25 +13,22 @@ namespace Nossos_Contos.Controllers
 
     [Route("[controller]")]
     [ApiController]
-
+   //[Authorize]
 
     public class MeController : Base.BaseController
     {
 
-        private Repositories.MongoDB.PersistentRepository<Entities.Media> mediaRepository;
-        private Services.MediaService mediaService;
+  
 
-        public MeController(DatabaseSettings databaseSettings, Model.Configurations.AWS.S3Configuration s3Configuration,
-                            Model.Configurations.AWS.Credentials credentials) : base(databaseSettings)
+        public MeController(DatabaseSettings databaseSettings, Models.Configurations.AWS.S3Configuration s3Configuration,
+                            Models.Configurations.AWS.Credentials credentials) : base(databaseSettings, s3Configuration, credentials)
         {
-            mediaRepository = new Repositories.MongoDB.PersistentRepository<Entities.Media>(databaseSettings, "medias");
-            mediaService = new Services.MediaService(mediaRepository, credentials, s3Configuration);
 
         }
 
 
-        [HttpPost]
-        public ActionResult<Entities.Media> Create(IFormFile file)
+        [HttpPost("post-media")]
+        public ActionResult<Entities.Media> SendFile(IFormFile file)
         {
 
             var info = new FileInfo(file.FileName);
@@ -44,8 +42,36 @@ namespace Nossos_Contos.Controllers
 
             return mediaService.Create(file.OpenReadStream(), type, extension);
 
+        }
+
+
+        [HttpPut("{id}")]
+        public ActionResult Update(string id, Models.AccountUpdate accountModel)
+        {
+
+            var accountUser = accountRepository.FirstOrDefault(a => a.id == id);
+            if (accountUser == null)
+                return this.Unauthorized("USER_NOT_FOUNDED");
+
+            accountService.Update(accountUser, accountModel);
+            var userUpdate = accountService.GetAccount(id);
+            return Ok();
 
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(string id)
+        {
+            var user = accountRepository.FirstOrDefault(a => a.id == id);
+            if (user == null)
+                return this.Unauthorized("USER_NOT_FOUNDED");
+
+            deleteNextDependencies.DeleteAccountDependencies(id);
+
+            accountService.Delete(id);
+            return Ok();
+        }
+
 
 
     }

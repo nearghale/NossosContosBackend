@@ -48,7 +48,7 @@ namespace Nossos_Contos.Services
 
         }
 
-        public void Update(Entities.Tale tale, Model.TaleUpdate taleUpdate)
+        public void Update(Entities.Tale tale, Models.TaleUpdate taleUpdate)
         {
             tale.Genre = taleUpdate.genre;
             tale.MinimumAge = taleUpdate.minimum_age;

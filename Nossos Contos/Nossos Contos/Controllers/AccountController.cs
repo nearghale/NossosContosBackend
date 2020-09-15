@@ -4,15 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Nossos_Contos.Services;
-using Nossos_Contos.Model;
+using Nossos_Contos.Models;
 using Nossos_Contos.Helpers;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models.MongoDB;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Nossos_Contos.Controllers
 {
 
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
 
     public class AccountController : Base.BaseController
     {
@@ -35,33 +37,22 @@ namespace Nossos_Contos.Controllers
 
         }
 
-     
-
-        [HttpPut("{id}")]
-        public ActionResult Update(string id, Model.AccountUpdate accountModel)
+        [AllowAnonymous]
+        [HttpPost("sign-up")]
+        public ActionResult SingUp(SignUp model)
         {
-
-            var accountUser = accountRepository.FirstOrDefault(a => a.id == id);
-            if (accountUser == null)
-                return this.Unauthorized("USER_NOT_FOUNDED");
-
-            accountService.Update(accountUser, accountModel);
-            var userUpdate = accountService.GetAccount(id);
+            var cognitoService = new Services.AWS.CognitoService();
+            cognitoService.SignUp(model);
             return Ok();
-
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public ActionResult<Token> Authenticate(Authentication model)
         {
-            var user = accountRepository.FirstOrDefault(a => a.id == id);
-            if (user == null)
-                return this.Unauthorized("USER_NOT_FOUNDED");
-
-            deleteNextDependencies.DeleteAccountDependencies(id);
-
-            accountService.Delete(id);
-            return Ok();
+            var cognitoService = new Services.AWS.CognitoService();
+            return cognitoService.Authenticate(model);
         }
 
 

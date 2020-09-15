@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Nossos_Contos.Model;
+using Nossos_Contos.Models;
 using Nossos_Contos.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Nossos_Contos.Helpers;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models.MongoDB;
 
 namespace Nossos_Contos.Controllers
 {
@@ -38,7 +38,7 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(string id, Model.TaleUpdate taleUpdate)
+        public ActionResult Update(string id, Models.TaleUpdate taleUpdate)
         {
             var tale = taleRepository.FirstOrDefault(t => t.id == id);
             if (tale == null)

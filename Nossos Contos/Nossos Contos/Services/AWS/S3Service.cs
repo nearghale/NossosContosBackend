@@ -13,7 +13,7 @@ namespace Nossos_Contos.Services.AWS
 		private AmazonS3Client _client;
 		private string _bucketName;
 
-		public S3Service(Model.Configurations.AWS.Credentials credential, Model.Configurations.AWS.S3Configuration configuration)
+		public S3Service(Models.Configurations.AWS.Credentials credential, Models.Configurations.AWS.S3Configuration configuration)
 		{
 			_client = new AmazonS3Client(credential.AccessKeyId, credential.SecretAccessKey, Amazon.RegionEndpoint.GetBySystemName(configuration.Region));
 			_bucketName = configuration.BucketName;

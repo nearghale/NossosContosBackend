@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Nossos_Contos.Model.MongoDB;
+using Nossos_Contos.Models.MongoDB;
 
 
 namespace Nossos_Contos.Repositories.MongoDB
@@ -30,12 +30,14 @@ namespace Nossos_Contos.Repositories.MongoDB
 
         }
 
-        public List<T> Get() {
+        public List<T> Get()
+        {
             return this.Collection.Find(f => true).ToList();
 
-       }
-        public List<T> Find(Expression<Func<T, bool>> expression) { 
-            
+        }
+        public List<T> Find(Expression<Func<T, bool>> expression)
+        {
+
             return this.Collection.Find(expression).ToList();
 
         }
@@ -74,7 +76,7 @@ namespace Nossos_Contos.Repositories.MongoDB
 
         public void Update(string id, T item)
         {
-          this.Collection.ReplaceOne(i => i.id == id, item);
+            this.Collection.ReplaceOne(i => i.id == id, item);
         }
 
         public void Remove(Expression<Func<T, bool>> expression)
@@ -82,7 +84,8 @@ namespace Nossos_Contos.Repositories.MongoDB
             this.Collection.DeleteMany(expression);
         }
 
-        public void Remove(T item) { 
+        public void Remove(T item)
+        {
             this.Collection.DeleteOne(i => i.id == item.id);
         }
 
