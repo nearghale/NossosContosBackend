@@ -10,12 +10,12 @@ namespace Nossos_Contos.Services.AWS
 	public class CognitoService
 	{
 
-		private const string USER_POOL_ID = "us-east-2_t4UQdsSO0";
+		private const string USER_POOL_ID = "us-east-2_testeSeguranca";
 		private AmazonCognitoIdentityProviderClient client;
 
 		public CognitoService()
 		{
-			client = new AmazonCognitoIdentityProviderClient("AKIAJ4VTUE37VZ6LJAEA", "cv5yRi5GBwRkGvXT8Tar21KE7xB3M5bpejrrrG+6", Amazon.RegionEndpoint.USEast2);
+			client = new AmazonCognitoIdentityProviderClient("", "", Amazon.RegionEndpoint.USEast2);
 		}
 
 		public void SignUp(Models.SignUp model)
