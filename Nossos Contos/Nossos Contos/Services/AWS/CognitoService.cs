@@ -45,7 +45,7 @@ namespace Nossos_Contos.Services.AWS
 			var request = new AdminInitiateAuthRequest
 			{
 				UserPoolId = USER_POOL_ID,
-				ClientId = "3fd3acd1ve2j1mcp100i83o9bl",
+				ClientId = "3bads4das4das54ad5",
 				AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
 			};
 
