@@ -8,6 +8,7 @@ using Nossos_Contos.Models;
 using Nossos_Contos.Helpers;
 using Nossos_Contos.Models.MongoDB;
 using Microsoft.AspNetCore.Authorization;
+using Nossos_Contos.Models.AWS.Cognito;
 
 namespace Nossos_Contos.Controllers
 {

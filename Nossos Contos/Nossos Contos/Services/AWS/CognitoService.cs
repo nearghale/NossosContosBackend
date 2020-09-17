@@ -4,21 +4,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nossos_Contos.Models.AWS.Cognito;
 
 namespace Nossos_Contos.Services.AWS
 {
 	public class CognitoService
 	{
 
-		private const string USER_POOL_ID = "us-east-1_criptografia";
+		private const string USER_POOL_ID = "us-east-2_criptografiaaaaa";
 		private AmazonCognitoIdentityProviderClient client;
 
 		public CognitoService()
 		{
-			client = new AmazonCognitoIdentityProviderClient("****", "****", Amazon.RegionEndpoint.USEast2);
+			client = new AmazonCognitoIdentityProviderClient("******", "********", Amazon.RegionEndpoint.USEast2);
 		}
 
-		public void SignUp(Models.SignUp model)
+		public void SignUp(SignUp model)
 		{
 			var request = new AdminCreateUserRequest()
 			{
@@ -43,12 +44,31 @@ namespace Nossos_Contos.Services.AWS
 
 		}
 
-		public Models.Token Authenticate(Models.Authentication model)
+		public void Update(string user_name,UpdateUserCognito model)
+		{
+			var request = new AdminUpdateUserAttributesRequest()
+			{
+				UserPoolId = USER_POOL_ID,
+				Username = user_name
+
+
+			};
+			request.UserAttributes.Add(new AttributeType() { Name = "birthdate", Value = model.birth_date });
+			request.UserAttributes.Add(new AttributeType() { Name = "name", Value = model.name });
+			request.UserAttributes.Add(new AttributeType() { Name = "family_name", Value = model.family_name });
+			request.UserAttributes.Add(new AttributeType() { Name = "picture", Value = model.picture });
+
+			client.AdminUpdateUserAttributesAsync(request).Wait();
+
+
+		}
+
+		public Token Authenticate(Authentication model)
 		{
 			var request = new AdminInitiateAuthRequest
 			{
 				UserPoolId = USER_POOL_ID,
-				ClientId = "criptografia4543213",
+				ClientId = "crepitografiaaaaaa",
 				AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
 			};
 
@@ -65,14 +85,24 @@ namespace Nossos_Contos.Services.AWS
 				return Authenticate(model);
 			}
 
-			var token = new Models.Token()
+			var token = new Token()
 			{
 				access_token = result.AuthenticationResult.IdToken
 			};
 			return token;
 		}
 
-		public void ChangePassword(Models.Authentication model)
+		public void Delete(string username)
+		{
+			var request = new AdminDeleteUserRequest()
+			{
+				Username = username,
+				UserPoolId = USER_POOL_ID
+			};
+			client.AdminDeleteUserAsync(request).Wait();
+		}
+
+		public void ChangePassword(Authentication model)
 		{
 			var request = new AdminSetUserPasswordRequest()
 			{

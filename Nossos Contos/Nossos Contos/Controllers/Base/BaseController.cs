@@ -9,6 +9,7 @@ using Nossos_Contos.Services;
 using Nossos_Contos.Models.MongoDB;
 using Nossos_Contos.Models.Configurations.AWS;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Nossos_Contos.Models.AWS.Cognito;
 
 namespace Nossos_Contos.Controllers.Base
 {

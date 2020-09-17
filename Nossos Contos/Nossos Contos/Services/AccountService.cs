@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Nossos_Contos.Models.AWS.Cognito;
 
 namespace Nossos_Contos.Services
 {
@@ -19,7 +20,7 @@ namespace Nossos_Contos.Services
 
         }
 
-        public Entities.Account Create(Models.CognitoUser cognitoUser, Entities.Account account)
+        public Entities.Account Create(CognitoUser cognitoUser, Entities.Account account)
         {
             var newAccount = new Entities.Account();
 

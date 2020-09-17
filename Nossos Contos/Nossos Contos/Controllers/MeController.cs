@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Nossos_Contos.Models.AWS.Cognito;
 
 namespace Nossos_Contos.Controllers
 {
@@ -18,7 +19,7 @@ namespace Nossos_Contos.Controllers
     public class MeController : Base.BaseController
     {
 
-  
+
 
         public MeController(DatabaseSettings databaseSettings, Models.Configurations.AWS.S3Configuration s3Configuration,
                             Models.Configurations.AWS.Credentials credentials) : base(databaseSettings, s3Configuration, credentials)
@@ -50,7 +51,7 @@ namespace Nossos_Contos.Controllers
         public ActionResult Update(Models.AccountUpdate accountModel)
         {
 
-            var accountUser = accountRepository.FirstOrDefault(a => a.UserId == this.CognitoUser.sub) ;
+            var accountUser = accountRepository.FirstOrDefault(a => a.UserId == this.CognitoUser.sub);
             if (accountUser == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
 
@@ -71,6 +72,25 @@ namespace Nossos_Contos.Controllers
             accountService.Delete(user);
             return Ok();
         }
+
+        [HttpDelete("delete-cognito-user/{username}")]
+        public ActionResult DeleteCognito(string username)
+        {
+
+            var cognitoService = new Services.AWS.CognitoService();
+            cognitoService.Delete(username);
+            return Ok();
+        }
+
+        [HttpPut("update-cognito-user/{username}")]
+        public ActionResult UpdateCognito(string username, UpdateUserCognito updateUserCognito)
+        {
+
+            var cognitoService = new Services.AWS.CognitoService();
+            cognitoService.Update(username, updateUserCognito);
+            return Ok();
+        }
+
 
 
 
