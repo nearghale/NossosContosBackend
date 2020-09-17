@@ -9,7 +9,10 @@ namespace Nossos_Contos.Entities
     public class Complaint : MongoDB.Base
     {
         [JsonProperty("id_tale")]
-        public string IDTale { get; set; }
+        public Guid IDTale { get; set; }
+
+        [JsonProperty("id_complaint")]
+        public Guid IDComplaint { get; set; }
 
         [JsonProperty("type_complaint")]
         public string TypeComplaint { get; set; }

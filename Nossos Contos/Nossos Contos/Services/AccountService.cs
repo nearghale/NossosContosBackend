@@ -19,18 +19,19 @@ namespace Nossos_Contos.Services
 
         }
 
-        public Entities.Account Create(Entities.Account account)
+        public Entities.Account Create(Models.CognitoUser cognitoUser, Entities.Account account)
         {
             var newAccount = new Entities.Account();
 
-            newAccount.Age = account.Age;
+            newAccount.BirthDate = account.BirthDate;
             newAccount.Name = account.Name;
-            newAccount.id = account.id;
-            newAccount.LastName = account.LastName;
+            newAccount.Email = account.Email;
+            newAccount.UserId = cognitoUser.sub;
+            newAccount.FamilyName = account.FamilyName;
             newAccount.Password = account.Password;
             newAccount.UserName = account.UserName;
             newAccount.CreationDateTime = DateTime.Now;
-            newAccount.ProfilePhoto = account.ProfilePhoto;
+            newAccount.Picture = account.Picture;
 
             var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
             generalInformation.AccountsTotal += 1;
@@ -43,33 +44,31 @@ namespace Nossos_Contos.Services
 
 
         }
-        public void Delete(string id)
+        public void Delete(Entities.Account account)
         {
             var generalInformation = _generalInformationRepository.FirstOrDefault(g => true);
             generalInformation.AccountsTotal -= 1;
 
             _generalInformationRepository.Update(generalInformation.id, generalInformation);
 
-            _accountRepository.Remove(id);
+            _accountRepository.Remove(account);
         }
 
         public void Update(Entities.Account account, Models.AccountUpdate accountUpdate)
         {
             account.Name = accountUpdate.name;
-            account.LastName = accountUpdate.last_name;
-            account.Age = accountUpdate.age;
+            account.FamilyName = accountUpdate.family_name;
+            account.BirthDate = accountUpdate.birth_date;
             account.Password = accountUpdate.password;
             account.UpdateDateTime = DateTime.Now;
-            account.ProfilePhoto = accountUpdate.profile_photo;
-       
-        
+            account.Picture = accountUpdate.picture;
 
            _accountRepository.Update(account.id, account);
 
         }
-        public Entities.Account GetAccount(string id)
+        public Entities.Account GetAccount(Guid id)
         {
-            return _accountRepository.FirstOrDefault(a => a.id == id);
+            return _accountRepository.FirstOrDefault(a => a.UserId == id);
         }
 
       

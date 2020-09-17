@@ -19,7 +19,6 @@ namespace Nossos_Contos.Controllers
     public class AccountController : Base.BaseController
     {
      
-        //testando commit
         public AccountController(DatabaseSettings databaseSettings) : base(databaseSettings)
         {
 
@@ -29,11 +28,11 @@ namespace Nossos_Contos.Controllers
         public ActionResult<Entities.Account> Create(Entities.Account account)
         {
 
-            var newAccount = accountRepository.FirstOrDefault(a => a.UserName == account.UserName);
+            var newAccount = accountRepository.FirstOrDefault(a => a.UserId == this.CognitoUser.sub) ;
             if (newAccount != null)
                return Unauthorized("USER_ALREADY_EXISTS");
 
-            return accountService.Create(account);
+            return accountService.Create(this.CognitoUser, account);
 
         }
 
@@ -41,6 +40,7 @@ namespace Nossos_Contos.Controllers
         [HttpPost("sign-up")]
         public ActionResult SingUp(SignUp model)
         {
+
             var cognitoService = new Services.AWS.CognitoService();
             cognitoService.SignUp(model);
             return Ok();

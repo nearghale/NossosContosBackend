@@ -9,7 +9,13 @@ namespace Nossos_Contos.Entities
     public class Comment : MongoDB.Base
     {
         [JsonProperty("id_tale")]
-        public string IDTale { get; set; }
+        public Guid IDTale { get; set; }
+
+        [JsonProperty("id_user")]
+        public Guid IDUser { get; set; }
+
+        [JsonProperty("id_comment")]
+        public Guid IDComment { get; set; }
 
         [JsonProperty("title_comment")]
         public string TitleComment { get; set; }

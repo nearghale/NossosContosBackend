@@ -26,6 +26,9 @@ namespace Nossos_Contos.Entities
 			Audio = 4
 		}
 
+		[JsonProperty("user_id")]
+		public Guid UserId { get; set; }
+
 		[JsonProperty("type_id")]
 		public int TypeId { get; set; }
 

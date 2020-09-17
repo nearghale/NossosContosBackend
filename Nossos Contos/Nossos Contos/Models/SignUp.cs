@@ -8,6 +8,7 @@
         public string name { get; set; }
         public string password { get; set; }
         public string user_name { get; set; }
+        public string picture { get; set; }
 
 
 

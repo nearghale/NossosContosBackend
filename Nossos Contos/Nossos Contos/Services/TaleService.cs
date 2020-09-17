@@ -29,8 +29,8 @@ namespace Nossos_Contos.Services
             var newTale = new Entities.Tale();
             newTale.Author = account.UserName;
             newTale.Genre = tale.Genre;
-            newTale.id = tale.id;
-            newTale.IDUser = tale.IDUser;
+            newTale.IDTale = Guid.NewGuid();
+            newTale.IDUser = account.UserId ;
             newTale.MinimumAge = tale.MinimumAge;
             newTale.NumberComplaints = tale.NumberComplaints;
             newTale.NumberViews = tale.NumberViews;
@@ -72,7 +72,7 @@ namespace Nossos_Contos.Services
             _taleRepository.Remove(tale);
         }
 
-        public List<Entities.Tale> GetTalesAuthor(string id)
+        public List<Entities.Tale> GetTalesAuthor(Guid id)
         {
 
             return _taleRepository.Find(t => t.IDUser == id);

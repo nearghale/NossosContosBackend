@@ -13,7 +13,7 @@ namespace Nossos_Contos.Controllers
 
     [Route("[controller]")]
     [ApiController]
-   //[Authorize]
+    [Authorize]
 
     public class MeController : Base.BaseController
     {
@@ -26,7 +26,7 @@ namespace Nossos_Contos.Controllers
 
         }
 
-
+        //TODO: associar com um usuário
         [HttpPost("post-media")]
         public ActionResult<Entities.Media> SendFile(IFormFile file)
         {
@@ -40,35 +40,35 @@ namespace Nossos_Contos.Controllers
             }
 
 
-            return mediaService.Create(file.OpenReadStream(), type, extension);
+            return mediaService.Create(file.OpenReadStream(), type, extension, CognitoUser.sub);
 
         }
 
 
-        [HttpPut("{id}")]
-        public ActionResult Update(string id, Models.AccountUpdate accountModel)
+
+        [HttpPut]
+        public ActionResult Update(Models.AccountUpdate accountModel)
         {
 
-            var accountUser = accountRepository.FirstOrDefault(a => a.id == id);
+            var accountUser = accountRepository.FirstOrDefault(a => a.UserId == this.CognitoUser.sub) ;
             if (accountUser == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
 
             accountService.Update(accountUser, accountModel);
-            var userUpdate = accountService.GetAccount(id);
             return Ok();
 
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(string id)
+        [HttpDelete]
+        public ActionResult Delete()
         {
-            var user = accountRepository.FirstOrDefault(a => a.id == id);
+            var user = accountRepository.FirstOrDefault(a => a.UserId == this.CognitoUser.sub);
             if (user == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
 
-            deleteNextDependencies.DeleteAccountDependencies(id);
+            deleteNextDependencies.DeleteAccountDependencies(user.UserId);
 
-            accountService.Delete(id);
+            accountService.Delete(user);
             return Ok();
         }
 

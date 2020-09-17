@@ -21,13 +21,14 @@ namespace Nossos_Contos.Services
         }
 
 
-        public Entities.Comment Create(Entities.Comment comment)
+        public Entities.Comment Create(Guid userId,Entities.Comment comment)
         {
 
             var newComment = new Entities.Comment();
 
             newComment.Commentary = comment.Commentary;
-            newComment.id = comment.id;
+            newComment.IDComment = Guid.NewGuid();
+            newComment.IDUser = userId;
             newComment.IDTale = comment.IDTale;
             newComment.TitleComment = comment.TitleComment;
             newComment.CreationDateTime = DateTime.Now;

@@ -23,7 +23,7 @@ namespace Nossos_Contos.Services
             var newComplaint = new Entities.Complaint();
 
             newComplaint.Denunciation = complaint.Denunciation;
-            newComplaint.id = complaint.id;
+            newComplaint.IDComplaint = Guid.NewGuid();
             newComplaint.IDTale = complaint.IDTale;
             newComplaint.TypeComplaint = complaint.TypeComplaint;
             newComplaint.TitleComplaint = complaint.TitleComplaint;

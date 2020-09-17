@@ -10,15 +10,20 @@ namespace Nossos_Contos.Entities
     public class Account : MongoDB.Base
     {
 
+        [JsonProperty("user_id")]
+        public Guid UserId { get; set; }
 
-        [JsonProperty("age")]
-        public int Age { get; set; }
+        [JsonProperty("birth_date")]
+        public string BirthDate { get; set; }
 
         [JsonProperty("creation_date")]
         public DateTime CreationDateTime { get; set; }
 
-        [JsonProperty("last_name")]
-        public string LastName { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
+
+        [JsonProperty("family_name")]
+        public string FamilyName { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -26,8 +31,8 @@ namespace Nossos_Contos.Entities
         [JsonProperty("password")]
         public string Password { get; set; }
 
-        [JsonProperty("profile_photo")]
-        public string ProfilePhoto { get; set; }
+        [JsonProperty("picture")]
+        public string Picture { get; set; }
 
         [JsonProperty("user_name")]
         public string UserName { get; set; }

@@ -10,7 +10,10 @@ namespace Nossos_Contos.Entities
     {
 
         [JsonProperty("id_user")]
-        public string IDUser { get; set; }
+        public Guid IDUser { get; set; }
+
+        [JsonProperty("id_tale")]
+        public Guid IDTale { get; set; }
 
         [JsonProperty("title")]
         public string Title { get; set; }

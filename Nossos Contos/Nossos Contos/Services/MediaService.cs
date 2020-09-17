@@ -37,12 +37,13 @@ namespace Nossos_Contos.Services
             return Entities.Media.Types.Unknown;
         }
 
-        public Entities.Media Create(Stream stream, Entities.Media.Types type, string extension)
+        public Entities.Media Create(Stream stream, Entities.Media.Types type, string extension, Guid userId)
         {
             var media = new Entities.Media(type, extension, $"https://{_s3Configuration.BucketName}.s3.amazonaws.com");
+            media.UserId = userId;
 
             s3Service.Upload(stream, $"{media.Key}.{extension}", Amazon.S3.S3CannedACL.PublicRead);
-
+     
             repository.Create(media);
             return media;
         }

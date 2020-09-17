@@ -27,7 +27,7 @@ namespace Nossos_Contos.Controllers
         [HttpPost]
         public ActionResult<Entities.Complaint> Create(Entities.Complaint complaint)
         {
-            var tale = taleRepository.FirstOrDefault(t => t.id == complaint.IDTale);
+            var tale = taleRepository.FirstOrDefault(t => t.IDTale == complaint.IDTale);
             if (tale == null)
                 return this.Unauthorized("TALE_NOT_FOUNDED");
 

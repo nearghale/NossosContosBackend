@@ -18,7 +18,8 @@ namespace Nossos_Contos.Controllers
     public class AdminController : Base.BaseController
     {
 
-        public AdminController(DatabaseSettings databaseSettings) : base(databaseSettings)
+        public AdminController(DatabaseSettings databaseSettings, Models.Configurations.AWS.S3Configuration s3Configuration,
+                            Models.Configurations.AWS.Credentials credentials) : base(databaseSettings, s3Configuration, credentials)
         {
 
         }
@@ -34,7 +35,7 @@ namespace Nossos_Contos.Controllers
             return primeiroDiaDoMes;
         }
 
-        [Authorize]
+  
         [HttpGet("reported-tales")]
         public ActionResult<List<Entities.Tale>> GetReportedTales()
         {
@@ -48,7 +49,7 @@ namespace Nossos_Contos.Controllers
 
         }
 
-        [Authorize]
+ 
         [HttpGet("total-tales")]
         public long GetTotalTales()
         {
@@ -63,9 +64,9 @@ namespace Nossos_Contos.Controllers
 
 
         [HttpDelete("delete-tale/{id}")]
-        public ActionResult DeleteTale(string id)
+        public ActionResult DeleteTale(Guid id)
         {
-            var tale = taleRepository.FirstOrDefault(t => t.id == id);
+            var tale = taleRepository.FirstOrDefault(t => t.IDTale == id);
             if (tale == null)
                 return this.Unauthorized("TALE_NOT_FOUNDED");
 
@@ -76,15 +77,15 @@ namespace Nossos_Contos.Controllers
         }
 
         [HttpDelete("delete-account/{id}")]
-        public ActionResult DeleteAccount(string id)
+        public ActionResult DeleteAccount(Guid id)
         {
-            var user = accountRepository.FirstOrDefault(a => a.id == id);
+            var user = accountRepository.FirstOrDefault(a => a.UserId == id);
             if (user == null)
                 return this.Unauthorized("USER_NOT_FOUNDED");
 
             deleteNextDependencies.DeleteAccountDependencies(id);
 
-            accountService.Delete(id);
+            accountService.Delete(user);
             return Ok();
         }
 
