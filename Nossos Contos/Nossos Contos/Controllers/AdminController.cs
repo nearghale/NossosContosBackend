@@ -24,6 +24,19 @@ namespace Nossos_Contos.Controllers
 
         }
 
+
+        [HttpPost]
+        public ActionResult<Entities.Admin> Create(Entities.Admin newAdmin)
+        {
+            var admin = adminRepository.FirstOrDefault(a => a.Email == newAdmin.Email);
+            if(admin != null)
+                return Unauthorized("USER_ALREADY_EXISTS");
+
+           return adminService.Create(newAdmin);
+        }
+
+
+
         [HttpGet("first-day")]
         public DateTime PrimeiroDiaDoMês()
         {

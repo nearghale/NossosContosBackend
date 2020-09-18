@@ -23,8 +23,9 @@ namespace Nossos_Contos.Controllers.Base
         protected Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation> generalInformationRepository;
         protected Repositories.MongoDB.PersistentRepository<Entities.Comment> commentRepository;
         protected Repositories.MongoDB.PersistentRepository<Entities.Media> mediaRepository;
-    
-        protected MediaService mediaService;
+		protected Repositories.MongoDB.PersistentRepository<Entities.Admin> adminRepository;
+
+		protected MediaService mediaService;
         protected AdminService adminService;
         protected AccountService accountService;
         protected TaleService taleService;
@@ -42,13 +43,14 @@ namespace Nossos_Contos.Controllers.Base
             taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
             commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
             complaintRepository = new Repositories.MongoDB.PersistentRepository<Entities.Complaint>(databaseSettings, "complaint");
-			
+			adminRepository = new Repositories.MongoDB.PersistentRepository<Entities.Admin>(databaseSettings, "admin");
+
 
 
 
 			//services
 			accountService = new AccountService(accountRepository, generalInformationRepository);
-            adminService = new AdminService(complaintRepository, taleRepository, accountRepository, generalInformationRepository);
+            adminService = new AdminService(adminRepository, complaintRepository, taleRepository, accountRepository, generalInformationRepository);
             taleService = new TaleService(taleRepository, generalInformationRepository);
             commentService = new CommentService(taleRepository, commentRepository);
             complaintService = new ComplaintService(taleRepository, complaintRepository);
@@ -67,10 +69,14 @@ namespace Nossos_Contos.Controllers.Base
 			generalInformationRepository = new Repositories.MongoDB.PersistentRepository<Entities.GeneralInformation>(databaseSettings, "general-information");
 			commentRepository = new Repositories.MongoDB.PersistentRepository<Entities.Comment>(databaseSettings, "comment");
 			taleRepository = new Repositories.MongoDB.PersistentRepository<Entities.Tale>(databaseSettings, "tale");
+			adminRepository = new Repositories.MongoDB.PersistentRepository<Entities.Admin>(databaseSettings, "admin");
+
 
 
 			mediaService = new MediaService(mediaRepository, credentials, s3Configuration);
 			accountService = new AccountService(accountRepository, generalInformationRepository);
+			adminService = new AdminService(adminRepository, complaintRepository, taleRepository, accountRepository, generalInformationRepository);
+
 
 
 			deleteNextDependencies = new DeleteNextDependenciesHelper(taleRepository, commentRepository, generalInformationRepository, mediaRepository);

@@ -11,12 +11,12 @@ namespace Nossos_Contos.Services.AWS
 	public class CognitoService
 	{
 
-		private const string USER_POOL_ID = "us-east-2_criptografiaaaaa";
+		private const string USER_POOL_ID = "us-east-2_criptografia";
 		private AmazonCognitoIdentityProviderClient client;
 
 		public CognitoService()
 		{
-			client = new AmazonCognitoIdentityProviderClient("******", "********", Amazon.RegionEndpoint.USEast2);
+			client = new AmazonCognitoIdentityProviderClient("*******", "**********", Amazon.RegionEndpoint.USEast2);
 		}
 
 		public void SignUp(SignUp model)
@@ -68,7 +68,7 @@ namespace Nossos_Contos.Services.AWS
 			var request = new AdminInitiateAuthRequest
 			{
 				UserPoolId = USER_POOL_ID,
-				ClientId = "crepitografiaaaaaa",
+				ClientId = "**********",
 				AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
 			};
 
