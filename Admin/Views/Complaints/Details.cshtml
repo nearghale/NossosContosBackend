@@ -1,0 +1,112 @@
+﻿@model Nossos_Contos.Entities.Complaint
+@{
+    ViewBag.Title = Model.TitleComplaint;
+
+
+}
+
+<!-- begin:: Subheader -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                @Model.IDTale
+            </h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="@Url.Action("index", "home")" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="@Url.Action("index", "users")" class="kt-subheader__breadcrumbs-link">
+                    Denúncias
+                </a>
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="#" class="kt-subheader__breadcrumbs-link">
+                    @Model.TitleComplaint
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Subheader -->
+<!-- begin:: Content -->
+    <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" >
+
+
+        <div class="col" align="center">
+
+
+            <div class="col-xl-8" >
+                <!--Begin::Portlet-->
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="kt-portlet__head kt-portlet__head--noborder">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <!--begin::Widget -->
+                        <div class="kt-widget kt-widget--user-profile-2">
+                            <div class="kt-widget__head">
+                                <div class="kt-widget__media">
+                                    <div class="kt-widget__pic kt-widget__pic--success kt-font-success kt-font-boldest kt-hidden">
+                                        @Model.IDTale
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="kt-widget__body">
+
+
+                                <div class="kt-widget__item">
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label" style="color:black; font-size: 20px">ID Conto:</span>
+
+                                        <a href="@Url.Action("details", "tales", new { id = Model.IDTale })" title="Visualizar conto">
+                                            <span class="kt-widget__data" style="font-size: 20px">@Model.IDTale</span>
+                                        </a>
+
+
+                                       
+                                    </div>
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label"  style="color:black; font-size: 20px">Título:</span>
+                                        <span class="kt-widget__data" style="font-size: 20px"">@Model.TitleComplaint</span>
+                                    </div>
+
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label"  style="color:black; font-size: 20px">Tipo Denúncia:</span>
+                                        <span class="kt-widget__data" style="font-size: 20px">@Model.TypeComplaint</span>
+                                    </div>
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label"  style="color:black; font-size: 20px">Data Criação:</span>
+                                        <span class="kt-widget__data" style="font-size: 20px">@Model.CreationDateTime</span>
+                                    </div>
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__label"  style="color:black; font-size: 20px">Data Atualização:</span>
+                                        <span class="kt-widget__data" style="font-size: 20px">@Model.UpdateDateTime</span>
+                                    </div>
+                                    <div class="kt-widget_contact" align="center"><span class="kt-widget__label" style="color:black"><h1>Denúncia:</h1></span></div>
+                                    <div class="kt-widget__contact">
+                                        <span class="kt-widget__data" style="font-size: 20px">@Model.Denunciation</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Widget -->
+                    </div>
+                </div>
+                <!--End::Portlet-->
+            </div>
+        </div>
+
+    <div class="kt-portlet__foot" align="center">
+        <div class="kt-form__actions" >
+            <a href="@Url.Action("index", "complaints")" class="btn btn-brand"><h3>Voltar</h3></a>
+        </div>
+    </div>
+</div>
+<!-- end:: Content -->

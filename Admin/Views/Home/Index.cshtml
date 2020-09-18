@@ -1,0 +1,155 @@
+﻿@model Nossos_Contos.Entities.GeneralInformation
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section Scripts {
+    <script src="~/vendors/custom/datatables/datatables.bundle.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Table').DataTable({
+                lengthMenu: [5, 10, 25, 50],
+                pageLength: 10,
+                language: {
+                    'lengthMenu': 'Display _MENU_',
+                },
+                order: [[1, 'desc']]
+            });
+        });
+    </script>
+}
+
+<!-- begin:: Subheader -->
+<div class="kt-subheader   kt-grid__item" id="kt_subheader">
+    <div class="kt-container  kt-container--fluid ">
+        <div class="kt-subheader__main">
+            <h3 class="kt-subheader__title">
+                Relatórios
+            </h3>
+            <span class="kt-subheader__separator kt-hidden"></span>
+            <div class="kt-subheader__breadcrumbs">
+                <a href="@Url.Action("index", "home")" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
+
+                <span class="kt-subheader__breadcrumbs-separator"></span>
+                <a href="#" class="kt-subheader__breadcrumbs-link">
+                    Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end:: Subheader -->
+<!-- begin:: Content -->
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head kt-portlet__head--lg">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon">
+                    <i class="kt-font-brand fa fa-user-cog"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    Dashboard
+                    <small>Dashboard da plataforma</small>
+                </h3>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" style="height:100%">
+    <div class="col">
+        <div class="row">
+            <!--begin: ResultsMonth-->
+            <div class="col-xl-6 order-xl-1">
+                <!--begin:: Widgets/Last Updates-->
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Resultados do Mês
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <!--begin::widget 12-->
+                        <div class="kt-widget4">
+                            <div class="kt-widget4__item">
+                                <span class="kt-widget4__icon">
+                                    <i class="fa fa-users kt-font-danger"></i>
+                                </span>
+                                <a href="@Url.Action("index", "orders")" class="kt-widget4__title kt-widget4__title--light">
+                                    Usuários:
+                                </a>
+                                <span class="kt-widget4__number kt-font-info">+@Model.NumberAccountsMonth</span>
+                            </div>
+
+                            <div class="kt-widget4__item">
+                                <span class="kt-widget4__icon">
+                                    <i class="fa fa-book  kt-font-success" style="margin-left:4px"></i>
+                                </span>
+                                <a href="@Url.Action("index", "withdraws")" class="kt-widget4__title kt-widget4__title--light" style="margin-left:6px">
+                                    Contos:
+                                </a>
+                                <span class="kt-widget4__number kt-font-success">+@Model.NumberTalesMonth</span>
+                            </div>
+
+                            <br />
+                            <div style="height:100%;"></div>
+                        </div>
+                        <!--end::Widget 12-->
+                    </div>
+                </div>
+                <!--end:: Widgets/Last Updates-->
+            </div>
+            <!--end: ResultsMonth-->
+            <!--Begin: ResultsGeneral-->
+            <div class="col-xl-6 order-xl-2">
+                <!--begin:: Widgets/Last Updates-->
+                <div class="kt-portlet kt-portlet--height-fluid">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">
+                                Resultados Gerais
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+                        <!--begin::widget 12-->
+                        <div class="kt-widget4">
+                            <div class="kt-widget4__item">
+                                <span class="kt-widget4__icon">
+                                    <i class="fa fa-users kt-font-danger"></i>
+                                </span>
+                                <a href="@Url.Action("index", "orders")" class="kt-widget4__title kt-widget4__title--light">
+                                    Quantidade Total de Usuário:
+                                </a>
+                                <span class="kt-widget4__number kt-font-info">@Model.AccountsTotal</span>
+                            </div>
+
+                            <div class="kt-widget4__item">
+                                <span class="kt-widget4__icon" style="margin-left:4px">
+                                    <i class="fa fa-book kt-font-success"></i>
+                                </span>
+                                <a href="@Url.Action("index", "withdraws")" class="kt-widget4__title kt-widget4__title--light" style="margin-left:6px">
+                                    Quantidade Total de Contos:
+                                </a>
+                                <span class="kt-widget4__number kt-font-success">@Model.TalesTotal</span>
+                            </div>
+
+                            <br />
+                            <div style="height:100%;"></div>
+                        </div>
+                        <!--end::Widget 12-->
+                    </div>
+                </div>
+                <!--end:: Widgets/Last Updates-->
+            </div>
+            <!--End: ResultsGeneral-->
+        </div>
+    </div>
+
+</div>
+<!-- end:: Content -->
