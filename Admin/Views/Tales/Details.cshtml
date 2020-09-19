@@ -64,16 +64,14 @@
                                     <div class="kt-widget__contact">
                                         <span class="kt-widget__label" style="color:black; font-size: 20px">ID Conto:</span>
 
-                                        <a href="@Url.Action("details", "accounts", new { id = Model.IDTale })" title="Visualizar conta">
                                             <span class="kt-widget__data" style="font-size: 20px">@Model.IDTale</span>
-                                        </a>
-
-
 
                                     </div>
                                     <div class="kt-widget__contact">
                                         <span class="kt-widget__label" style="color:black; font-size: 20px">Autor:</span>
-                                        <span class="kt-widget__data" style="font-size: 20px" ">@Model.Author</span>
+                                        <a href="@Url.Action("details", "accounts", new { id = Model.IDUser })" title="Visualizar conta">
+                                            <span class="kt-widget__data" style="font-size: 20px">@Model.Author</span>
+                                        </a>
                                     </div>
 
                                     <div class="kt-widget__contact">

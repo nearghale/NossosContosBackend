@@ -11,12 +11,12 @@ namespace Nossos_Contos.Services.AWS
 	public class CognitoService
 	{
 
-		private const string USER_POOL_ID = "us-east-2_criptografia";
+		private const string USER_POOL_ID = "us-east-2_T5EUOzgI0";
 		private AmazonCognitoIdentityProviderClient client;
 
 		public CognitoService()
 		{
-			client = new AmazonCognitoIdentityProviderClient("*******", "**********", Amazon.RegionEndpoint.USEast2);
+			client = new AmazonCognitoIdentityProviderClient("AKIAJAOLX54LL6UXTP5Q", "zjpA5kFBStssyxAatu2M418S7PwgBx5bz6ebiUn2", Amazon.RegionEndpoint.USEast2);
 		}
 
 		public void SignUp(SignUp model)
@@ -30,7 +30,7 @@ namespace Nossos_Contos.Services.AWS
 				Username = model.user_name,
 				UserAttributes = new List<AttributeType>()
 			};
-			request.UserAttributes.Add(new AttributeType() { Name = "birthdate", Value = model.birth_date});
+			request.UserAttributes.Add(new AttributeType() { Name = "birthdate", Value = model.birth_date });
 			request.UserAttributes.Add(new AttributeType() { Name = "name", Value = model.name });
 			request.UserAttributes.Add(new AttributeType() { Name = "family_name", Value = model.family_name });
 			request.UserAttributes.Add(new AttributeType() { Name = "email", Value = model.email });
@@ -38,13 +38,13 @@ namespace Nossos_Contos.Services.AWS
 
 			var response = client.AdminCreateUserAsync(request);
 
-			response.Wait();		
+			response.Wait();
 
 			var result = response.Result;
 
 		}
 
-		public void Update(string user_name,UpdateUserCognito model)
+		public void Update(string user_name, UpdateUserCognito model)
 		{
 			var request = new AdminUpdateUserAttributesRequest()
 			{
@@ -68,7 +68,7 @@ namespace Nossos_Contos.Services.AWS
 			var request = new AdminInitiateAuthRequest
 			{
 				UserPoolId = USER_POOL_ID,
-				ClientId = "**********",
+				ClientId = "62oprcd00vrbth0bgm42d4cc0k",
 				AuthFlow = AuthFlowType.ADMIN_NO_SRP_AUTH
 			};
 

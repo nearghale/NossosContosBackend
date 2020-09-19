@@ -73,14 +73,17 @@
                     @foreach (var tale in Model)
                     {
                     <tr>
-
-                        <td class="text-center"><h3>@tale.Author</h3></td>
+                        <td class="text-center">
+                            <a href="@Url.Action("details", "accounts", new { id = tale.IDUser })" title="Visualizar">
+                                <i class="text-center"><h3>@tale.Author</h3></i>
+                            </a>
+                        </td>
                         <td class="text-center"><h3>@tale.Title</h3></td>
                         <td class="text-center"><h3>@tale.Genre</h3></td>
                         <td class="text-center"><h3>@tale.MinimumAge</h3></td>
                         <td class="text-center"><h3>@tale.CreationDateTime</h3></td>
 
-                      
+
 
                         <td class="text-center">
                             <a href="@Url.Action("delete", "tales", new { id = tale.IDTale })" onclick="return confirm('Tem certeza que deseja excluir esse conto?')" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Excluir">
