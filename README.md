@@ -7,3 +7,5 @@ O projeto conta com a presença de design patterns, POO, conceitos SOLID, e dos 
 
 Atualmente o projeto está somente com a implementação do backend, posteriormente irei acrescentar o front end usando o framework react native.
 
+Esse aplicativo foi arquitetado por mim, com a ajuda dos coladobores Rafael Anacleto e Lucas Mazurque, ambos amigos da faculdade que eu tive o prazer de compartilhar um pouco do meu conhecimento de desenvolvimento, para me ajudar na criação do APP e tornar os mesmos, profissionais melhores. 
+
